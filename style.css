@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,200&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+	outline: none;
+}
+.line{
+	position: absolute;
+	top: 0.9rem;
+	left: 0.5rem;
+	width: 60px;
+	height: 60px;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: rgb(46, 46, 247);
+
+}
+
+.line>div{
+	position: absolute;
+	width: 60%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: white;
+}
+.line:hover{
+	transition: 1s;
+    transform: rotate(180deg);
+    cursor: pointer; 
+}
+
+.line>div:before{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: white;
+	top: -10px;
+	left: 0;
+}
+
+.line >div:after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: white;
+	top: 10px;
+	left: 0;
+}
+body{
+    background-color: white;
+	background-image: url("images.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100vh  ;
+}
+.mainContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container{
+    background-color: white;
+    width: 350px;
+    height: 500px;
+    margin-top: 55px;
+    padding:0 15px 15px 15px;
+	box-shadow: 0 10px 30px -5px rgb(0,0,0,0.8 );
+	border-radius: 5px;
+}
+.precedenceAndCase{
+	display: flex;
+	justify-content: space-between;
+}
+.precedenceAndCase .precedence select{
+	width: 140px;
+}
+.precedenceAndCase .case select{
+	width: 140px;
+}
+h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+	font-weight: bold;
+}
+.header ,.info ,.topik ,.precedence ,.case,.date{
+    margin: 4px;
+	margin-top: 10px;
+}
+.header input,.info input,.topik textarea ,.precedence select ,.case select{
+	width: 100%;
+	border: 1px solid rgb(53, 53, 53);
+}
+.header input:focus,.info input:focus,.topik textarea:focus{
+	border: 1px solid rgba(0,0,0,0.3);
+}
+.precedence select ,.case select,.date input{
+	width: 100px;
+}
+.precedence select:focus ,.case select:focus,.date input:focus{
+	border: 1px solid rgba(0,0,0,0.3);
+}
+
+.date{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.date .start input ,.date .finish input{
+	width: 140px;
+	border: 1px solid rgb(49, 49, 49);
+}
+.date .start input:focus ,.date .finish input:focus{
+	border: 1px solid rgba(0,0,0,0.3);
+}
+
+button{
+    width: 100%;
+    padding: 10px;
+    margin-top:8px ;
+    border-radius: 5px;
+    border: none;
+    font-weight: bolder;
+    font-size: 22px;
+    cursor: pointer;
+    background-color: rgb(46, 46, 247);
+    color: white;
+}

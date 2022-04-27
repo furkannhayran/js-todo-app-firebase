@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="mainContainer">
+    <div  class='line'>
+        <div>
+            <div></div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>ToDo App</h1>
+        <div class="header">
+            <h5>Kime</h5>
+            <input id="names" type="text"  id="">
+        </div>
+        <div class="info">
+            <h5>Bilgi</h5>
+            <input id="info" type="text">
+        </div>
+        <div class="topik">
+            <h5>Konu</h5>
+        <textarea name="" id="text" cols="30" rows="5"></textarea>
+        </div>
+        <div class="precedenceAndCase">
+            <div class="precedence">
+                <h5>Öncelik</h5>
+                <select name="" id="precedences">
+                    <option value="">seciniz</option>
+                    <option value="düşük">düşük</option>
+                    <option value="orta">orta</option>
+                    <option value="yüksek">yüksek</option>
+                </select>
+            </div>
+            <div class="case">
+                <h5>Durum</h5>
+                <select id="cases" class="durum">
+                    <option>seciniz</option>
+                    <option value="test">test</option>
+                    <option value="yeni">yeni</option>
+                    <option value="tamamlandı">tamamlandı</option>
+                </select>
+            </div>
+        </div>
+        <div class="date">
+            <div class="start">
+                <h5>Başlangıc</h5>
+                <input id="startDate" class="inputDate" type="date"> </input>
+            </div>
+            <div class="finish">
+                <h5>Bitiş</h5>
+                <input id="endDate" class="inputDate" type="date"> </input>
+            </div>
+        </div>
+        <button id="save"> kayıt </button>
+    </div>
+  
+</div>
+<div id="page"></div>
+<button id="saves"> kayıt </button>
+<div id="deneme" class="deneme"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./script.js"></script>
+</body>
+
+</html>
