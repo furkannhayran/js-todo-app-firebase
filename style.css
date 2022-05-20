@@ -1,89 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,200&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto Mono', monospace;
+    font-family:sans-serif;
 	outline: none;
 }
-.line{
-	position: absolute;
-	top: 0.9rem;
-	left: 0.5rem;
-	width: 60px;
-	height: 60px;
-	z-index: 2;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	background: rgb(46, 46, 247);
-
-}
-
-.line>div{
-	position: absolute;
-	width: 60%;
-	height: 3px;
-	border-radius: 1.5px;
-	background-color: white;
-}
-.line:hover{
-	transition: 1s;
-    transform: rotate(180deg);
-    cursor: pointer; 
-}
-
-.line>div:before{
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 3px;
-	border-radius: 1.5px;
-	background-color: white;
-	top: -10px;
-	left: 0;
-}
-
-.line >div:after{
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 3px;
-	border-radius: 1.5px;
-	background-color: white;
-	top: 10px;
-	left: 0;
+.parent{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
 }
 body{
     background-color: white;
 	background-image: url("images.jpg");
 	background-repeat: no-repeat;
-	background-size: 100% 100vh  ;
+	background-size: 100% 100vw  ;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    height: 325px;
+    box-shadow: 0 10px 30px -5px rgb(0,0,0,0.8 );
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 20px;
+    background-color: white;
 }
 .mainContainer{
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-left: 100px;
+    height: 100vh;
+    justify-content: center;
 }
 .container{
     background-color: white;
-    width: 350px;
-    height: 500px;
-    margin-top: 55px;
+    width: 500px;
+    height: 96vh;
     padding:0 15px 15px 15px;
 	box-shadow: 0 10px 30px -5px rgb(0,0,0,0.8 );
 	border-radius: 5px;
+    /* margin-left: 300px; */
 }
 .precedenceAndCase{
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 .precedenceAndCase .precedence select{
-	width: 140px;
+	width: 225px;
+	border: 1px solid rgb(131, 131, 131);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 .precedenceAndCase .case select{
-	width: 140px;
+	width: 225px;
+	border: 1px solid rgb(131, 131, 131);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 h1{
     display: flex;
@@ -97,30 +77,27 @@ h1{
 }
 .header input,.info input,.topik textarea ,.precedence select ,.case select{
 	width: 100%;
-	border: 1px solid rgb(53, 53, 53);
-}
-.header input:focus,.info input:focus,.topik textarea:focus{
-	border: 1px solid rgba(0,0,0,0.3);
+	border: 1px solid rgb(131, 131, 131);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 .precedence select ,.case select,.date input{
 	width: 100px;
 }
-.precedence select:focus ,.case select:focus,.date input:focus{
-	border: 1px solid rgba(0,0,0,0.3);
-}
 
 .date{
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 
 .date .start input ,.date .finish input{
-	width: 140px;
-	border: 1px solid rgb(49, 49, 49);
-}
-.date .start input:focus ,.date .finish input:focus{
-	border: 1px solid rgba(0,0,0,0.3);
+	width: 225px;
+	border: 1px solid rgb(131, 131, 131);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
 button{
@@ -132,6 +109,35 @@ button{
     font-weight: bolder;
     font-size: 22px;
     cursor: pointer;
+    background-color: white;
+    border: 1px solid rgb(46, 46, 247);
+    color: rgb(46, 46, 247);
+    transition: .4s;
+    margin-bottom: 5px;
+}
+button:hover{
     background-color: rgb(46, 46, 247);
+    border: 1px solid white;
     color: white;
+    transition: .4s;
+}
+h5{
+    font-weight: 600;
+}
+
+
+.mainContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
+    width: 900px;
+    margin-left: -50px;
+    transition: all 0.5s;
+}
+
+#id{
+    color: red;
+    display: none;
 }

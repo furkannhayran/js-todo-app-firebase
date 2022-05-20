@@ -1,70 +1,112 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
 
-let data = [];
-let datas = [];
-let dataKeys =[],
-  dataContent = [];
-$(document).ready(function(){
+  var data=[];
+  const allData= [];
+  var id = Math.floor(Math.random()*1000);
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8q2cQ5BilFS0ATFHtT_Z4NgTfpj2-qfE",
+    authDomain: "js-todo-2db46.firebaseapp.com",
+    databaseURL: "https://js-todo-bc5f0-default-rtdb.firebaseio.com/",
+    projectId: "js-todo-2db46",
+    storageBucket: "js-todo-2db46.appspot.com",
+    messagingSenderId: "64586001074",
+    appId: "1:64586001074:web:ff5239791c6775efd9f7ab",
+    measurementId: "G-5T7XB6T1B8"
+  };
 
-  $('#save').click(function(){
-    let names = $('#names').val()
-    let info = $('#info').val()
-    let text = $('#text').val()
-    let precedences = $('#precedences').val()
-    let cases = $('#cases').val()
-    let startDate = $('#startDate').val()
-    let endDate = $('#endDate').val()
-    data.push({name: "name", value: names })
-    data.push({name: "info", value: info})
-    data.push({name: "text", value: text})
-    data.push({name: "precedences", value: precedences})
-    data.push({name: "cases", value: cases})
-    data.push({name: "startDate", value: startDate})
-    data.push({name: "endDate", value: endDate})
-    console.log(data)
-    const pushOptions = {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors',
-      credentials: 'same-origin',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  import {getDatabase, ref, set, get, child, update, remove } 
+  from "https://www.gstatic.com/firebasejs/9.7.0/firebase-database.js";
+  const db = getDatabase();
+
+  window.onload = function getAllData(){
+    const dbref = ref(db);
+
+    get(child(dbref,"ToDo")).then((snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        data.push(childSnapshot.val())
+      })
+      data.forEach((item)=>{
+        allData.push(item) 
+      })
+      createFunc()
+    })
+  }
+  function createFunc(){
+    if(allData !== ""){
+      allData.forEach((index)=>{
+        const {names, info, text, precedences, cases, startDate, endDate ,id} = index;
+        const content = document.getElementById ('content')
+        const main = document.createElement('div')
+        var button = document.createElement('button')
+        var updateButton = document.createElement('button')
+        updateButton.innerHTML = "Düzenle"
+        button.innerHTML = "Sil"
+        main.classList.add('main')
+        main.innerHTML = 
+        `
+        <p id="id">id : ${id} </p>
+        <p id="names">name : ${names} </p>
+        <p id="info">bilgi : ${info} </p>
+        <p id="text">Konu : ${text} </p>
+        <p id="precedences">Öncelik : ${precedences} </p>
+        <p id="cases">Durum : ${cases} </p>
+        <p id="startDate">Başlangıç Tarihi : ${startDate} </p>
+        <p id="endDate">Bitiş Tarihi : ${endDate} </p>
+        `
+        content.appendChild(main)
+        main.appendChild(button);
+        main.appendChild(updateButton);   
+        button.onclick = removeData;
+        updateButton.onclick = updateDatas;
+        
+      })
     }
-    var dataAPI =  fetch('https://js-todo-bc5f0-default-rtdb.firebaseio.com/'+`/todo.json`,pushOptions)
-    .then(response => response.json())
-
-  })
-
-
-  $('#saves').click(function(){
-      const pushOptions = {
-        method: 'GET',
+  }
+       // silme işlemi
+      function removeData(oEvent){
+        const selectId =  oEvent.target.parentElement.children.item(0).innerText.slice(5)
+        console.log(typeof selectId)
+        remove(ref(db, "ToDo/"+ selectId))
+        .then(() => {
+          location.reload();
+        }).catch((err) => {
+          alert(err)
+        });
       }
-    
-      const reqURL = `https://js-todo-bc5f0-default-rtdb.firebaseio.com/` + `/todo.json`
-      const dataAPI =  fetch(reqURL, pushOptions)
-      .then(response => response.json())
-      .then(res =>{
-        dataKeys = Object.keys(res)
-        datas = Object.values(res)
+      // düzenleme işlemi
+      function  updateDatas(oEvent){
+        const selectId =  oEvent.target.parentElement.children.item(0).innerText.slice(5)
+        console.log("asd")
+     
+         location.href  = `index.html?${selectId}`
+
+      }
+       // kayıt işlemi
+      $('#save').click(function(){
+        set(ref(db, "ToDo/"+id),{
+          names : $('#names').val(),
+          info : $('#info').val(),
+          text : $('#text').val(),
+          precedences : $('#precedences').val(),
+          cases : $('#cases').val(),
+          startDate : $('#startDate').val(),
+          endDate : $('#endDate').val(),
+          id: id,
+        })
+        .then(() => {
+          alert("Başarılı")
+        }).catch((err) => {
+          alert(err)
+        });
+        location.reload();
+        getAllData()
+        
       })
-      dataKeys.map(item=>{
-        keys= item
-      })
-      datas.map(item=>{
-        dataContent = item
-        console.log(dataContent)
-      }) 
 
 
-      dataContent.forEach(element => {
-        const para = document.createElement("p");
-        para.innerHTML = element.name;
-        document.getElementById("deneme").appendChild(para);
-        console.log(para)
-      });
-  })
-})
 
 
 
@@ -72,194 +114,3 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const todoInput = document.querySelector(".todo-input");
-// const todoButton = document.querySelector(".todo-button");
-// const todoList = document.querySelector(".todo-list");
-// const filterOption = document.querySelector(".filter-todo");
-
-// //Event Listeners
-// document.addEventListener("DOMContentLoaded", getTodos);
-// todoButton.addEventListener("click", addTodo);
-// todoList.addEventListener("click", deleteTodo);
-// filterOption.addEventListener("click", filterTodo);
-
-// //Functions
-
-// function addTodo(e) {
-//   //Prevent natural behaviour
-//   e.preventDefault();
-//   //Create todo div
-//   const todoDiv = document.createElement("div");
-//   todoDiv.classList.add("todo");
-//   //Create list
-//   const newTodo = document.createElement("li");
-//   newTodo.innerText = todoInput.value;
-//   //Save to local - do this last
-//   //Save to local
-//   saveLocalTodos(todoInput.value);
-//   //
-//   newTodo.classList.add("todo-item");
-//   todoDiv.appendChild(newTodo);
-//   todoInput.value = "";
-//   //Create Completed Button
-//   const completedButton = document.createElement("button");
-//   completedButton.innerHTML = `<i class="fas fa-check"></i>`;
-//   completedButton.classList.add("complete-btn");
-//   todoDiv.appendChild(completedButton);
-//   //Create trash button
-//   const trashButton = document.createElement("button");
-//   trashButton.innerHTML = `<i class="fas fa-trash"></i>`;
-//   trashButton.classList.add("trash-btn");
-//   todoDiv.appendChild(trashButton);
-//   //attach final Todo
-//   todoList.appendChild(todoDiv);
-// }
-
-// function deleteTodo(e) {
-//   const item = e.target;
-
-//   if (item.classList[0] === "trash-btn") {
-//     // e.target.parentElement.remove();
-//     const todo = item.parentElement;
-//     todo.classList.add("fall");
-//     //at the end
-//     removeLocalTodos(todo);
-//     todo.addEventListener("transitionend", e => {
-//       todo.remove();
-//     });
-//   }
-//   if (item.classList[0] === "complete-btn") {
-//     const todo = item.parentElement;
-//     todo.classList.toggle("completed");
-//     console.log(todo);
-//   }
-// }
-
-// function filterTodo(e) {
-//   const todos = todoList.childNodes;
-//   todos.forEach(function(todo) {
-//     switch (e.target.value) {
-//       case "all":
-//         todo.style.display = "flex";
-//         break;
-//       case "completed":
-//         if (todo.classList.contains("completed")) {
-//           todo.style.display = "flex";
-//         } else {
-//           todo.style.display = "none";
-//         }
-//         break;
-//       case "uncompleted":
-//         if (!todo.classList.contains("completed")) {
-//           todo.style.display = "flex";
-//         } else {
-//           todo.style.display = "none";
-//         }
-//     }
-//   });
-// }
-
-// function saveLocalTodos(todo) {
-//   let todos;
-//   if (localStorage.getItem("todos") === null) {
-//     todos = [];
-//   } else {
-//     todos = JSON.parse(localStorage.getItem("todos"));
-//   }
-//   todos.push(todo);
-//   localStorage.setItem("todos", JSON.stringify(todos));
-// }
-// function removeLocalTodos(todo) {
-//   let todos;
-//   if (localStorage.getItem("todos") === null) {
-//     todos = [];
-//   } else {
-//     todos = JSON.parse(localStorage.getItem("todos"));
-//   }
-//   const todoIndex = todo.children[0].innerText;
-//   todos.splice(todos.indexOf(todoIndex), 1);
-//   localStorage.setItem("todos", JSON.stringify(todos));
-// }
-
-// function getTodos() {
-//   let todos;
-//   if (localStorage.getItem("todos") === null) {
-//     todos = [];
-//   } else {
-//     todos = JSON.parse(localStorage.getItem("todos"));
-//   }
-//   todos.forEach(function(todo) {
-//     //Create todo div
-//     const todoDiv = document.createElement("div");
-//     todoDiv.classList.add("todo");
-//     //Create list
-//     const newTodo = document.createElement("li");
-//     newTodo.innerText = todo;
-//     newTodo.classList.add("todo-item");
-//     todoDiv.appendChild(newTodo);
-//     todoInput.value = "";
-//     //Create Completed Button
-//     const completedButton = document.createElement("button");
-//     completedButton.innerHTML = `<i class="fas fa-check"></i>`;
-//     completedButton.classList.add("complete-btn");
-//     todoDiv.appendChild(completedButton);
-//     //Create trash button
-//     const trashButton = document.createElement("button");
-//     trashButton.innerHTML = `<i class="fas fa-trash"></i>`;
-//     trashButton.classList.add("trash-btn");
-//     todoDiv.appendChild(trashButton);
-//     //attach final Todo
-//     todoList.appendChild(todoDiv);
-//   });
-// }

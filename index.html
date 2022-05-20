@@ -5,17 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="menu-style.css">
     <title>Document</title>
 </head>
 <body>
     
-<div class="mainContainer">
-    <div  class='line'>
-        <div>
-            <div></div>
+<div class="parent">
+
+    <div class="line-container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="./homePage.html">Anasayfa</a></li>
+                <li style="color: red;">Yapılacak Ekle</li>
+            </ul>
+        </div>
+        <div class="content">
+            <button id="button" value="open" class="line" onclick="menu()" >
+                <div><div></div></div>
+             </button>
         </div>
     </div>
+
+
+<div class="mainContainer">
     <div class="container">
         <h1>ToDo App</h1>
         <div class="header">
@@ -34,25 +46,25 @@
             <div class="precedence">
                 <h5>Öncelik</h5>
                 <select name="" id="precedences">
-                    <option value="">seciniz</option>
-                    <option value="düşük">düşük</option>
-                    <option value="orta">orta</option>
-                    <option value="yüksek">yüksek</option>
+                    <option value="">Seçiniz</option>
+                    <option value="düşük">Düşük</option>
+                    <option value="orta">Orta</option>
+                    <option value="yüksek">Yüksek</option>
                 </select>
             </div>
             <div class="case">
                 <h5>Durum</h5>
                 <select id="cases" class="durum">
-                    <option>seciniz</option>
-                    <option value="test">test</option>
-                    <option value="yeni">yeni</option>
-                    <option value="tamamlandı">tamamlandı</option>
+                    <option>Seciniz</option>
+                    <option value="test">Test</option>
+                    <option value="yeni">Yeni</option>
+                    <option value="tamamlandı">Tamamlandı</option>
                 </select>
             </div>
         </div>
         <div class="date">
             <div class="start">
-                <h5>Başlangıc</h5>
+                <h5>Başlangıç</h5>
                 <input id="startDate" class="inputDate" type="date"> </input>
             </div>
             <div class="finish">
@@ -60,15 +72,19 @@
                 <input id="endDate" class="inputDate" type="date"> </input>
             </div>
         </div>
-        <button id="save"> kayıt </button>
+        <button id="save"> Kayıt </button>
+        <button id="saves"> düzenle </button>
     </div>
-  
 </div>
+</div>
+
+
 <div id="page"></div>
-<button id="saves"> kayıt </button>
 <div id="deneme" class="deneme"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="./script.js"></script>
+<script type="module" src="./script.js"></script>
+<script src="./events.js"></script>
+<script type="module" src="./index.js"></script>
 </body>
 
 </html>
