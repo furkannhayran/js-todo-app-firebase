@@ -21,13 +21,22 @@ var edit = true;
   from "https://www.gstatic.com/firebasejs/9.7.0/firebase-database.js";
   const db = getDatabase();
 
+  const saves = document.getElementById('saves')
+  const save = document.getElementById('save')
+    
 let params = new URLSearchParams( window.location.search)
     const selectId =  Array.from(params.keys())
     var numberSelectId = Number(selectId)
 
+    if(selectId == 0){
+      saves.style.display="none"
+      save.style.display="block" 
+    }else if(selectId !== ""){
+      saves.style.display="block"
+      save.style.display="none"
+    }
 
-    const saves = document.getElementById('saves')
-      
+
       var names = document.getElementById('names')
       var info = document.getElementById('info')
       var text = document.getElementById('text')
@@ -81,3 +90,4 @@ let params = new URLSearchParams( window.location.search)
           });
           
       })
+
